@@ -6,7 +6,6 @@
         label="Login"
         type="text"
         v-model="login"
-        hide-details="auto"
     ></v-text-field>
     <v-text-field
         class="input-data"
