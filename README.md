@@ -1,4 +1,4 @@
-# todo-ninja
+# auth_table
 
 ## Project setup
 ```
