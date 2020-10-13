@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
   name: 'Auth',
   data() {
@@ -34,18 +36,13 @@ export default {
       login: "",
       password: "",
       isActive: false,
-      msg: ""
+      msg: "Не верный логин или пароль!"
     }
   },
   methods: {
+    ...mapActions(['getAuthToken']),
     onSubmit() {
-      let dataAuth = {'login': 'superuser', 'password': 'db'};
-      if (dataAuth.login !== this.login || dataAuth.password !== this.password) {
-        this.isActive = true;
-        this.msg = 'Не верный логин или пароль!';
-      } else {
-        window.location.replace('/table');
-      }
+      this.getAuthToken({'login': this.login,'password': this.password});
     }
   }
 }
