@@ -31,24 +31,44 @@ export default new Vuex.Store({
             });
         },
 
-        getDataTable(ctx) {
-            // if (ctx.getters.authToken === '') {
+        getDataTable: function (ctx) {
+            // if (ctx.getters.authToken === '') {              // это имеет смысл, если мы случайно зашли на вторую вкладку не залогинившись
             //     router.push({path: '/auth/login'});
             // }
             console.log(ctx.getters.authToken)
-            let config = {
-                method: 'get',
-                url: 'http://localhost:8081/table',
-                headers: {
-                    'authorization': ctx.getters.authToken
-                }
-            }
-            axios(config).then((response) => {
-                console.log(response);
-                ctx.commit('addDataTable', response.data)
-            }, (error) => {
-                console.log(error);
-            });
+
+            axios.get('http://localhost:8081/table',
+                {headers: {'Authorization': ctx.getters.authToken}}
+            ).then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+
+            /*            let config = {
+                            method: 'get',
+                            url: 'http://localhost:8081/table',
+                            headers: {
+                                'Access-Control-Allow-Origin': '*',
+                                'Content-Type': 'application/json',
+                                // 'Content-Type': 'text/html',
+                                'Access-Control-Allow-Headers': 'Authorization',
+                                // 'Cache-Control': null,
+                                // 'X-Requested-With': null,
+                                'Authorization': ctx.getters.authToken,
+                            },
+                        };
+
+                        axios(config)
+                            .then(function (response) {
+                                console.log(JSON.stringify(response.data));
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });*/
+
         }
     },
     getters: {

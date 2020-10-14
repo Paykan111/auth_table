@@ -28,6 +28,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
+import router from "@/router";
 
 export default {
   name: 'Auth',
@@ -47,9 +48,13 @@ export default {
   methods: {
     ...mapActions(['getAuthToken']),
     onSubmit() {
-      this.getAuthToken({'login': this.login,'password': this.password});
-      if (this.authToken === '') {
-        this.isActive = true;
+      if (this.authToken === '') {    // если токена ещё нет в сторе
+        this.getAuthToken({'login': this.login, 'password': this.password});
+        if (this.authToken === '') {
+          this.isActive = true;
+        }
+      } else {
+        router.push({path: '/table'});  // в случае, если мы уже логинились, чтобы не создавать новый токен
       }
     }
   }
