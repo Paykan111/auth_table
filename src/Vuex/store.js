@@ -37,30 +37,26 @@ export default new Vuex.Store({
             // }
             console.log(ctx.getters.authToken)
 
+            let headers = {'authorization': ctx.getters.authToken}
             axios.get('http://localhost:8081/table',
-                {headers: {'Authorization': ctx.getters.authToken}}
+                {headers}
+                //{headers: {'Authorization': ctx.getters.authToken}}
             ).then(function (response) {
                 console.log(JSON.stringify(response.data));
-            })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            }).catch(function (error) {
+                console.log(error);
+            });
 
 
             /*            let config = {
                             method: 'get',
                             url: 'http://localhost:8081/table',
                             headers: {
-                                'Access-Control-Allow-Origin': '*',
-                                'Content-Type': 'application/json',
-                                // 'Content-Type': 'text/html',
-                                'Access-Control-Allow-Headers': 'Authorization',
-                                // 'Cache-Control': null,
-                                // 'X-Requested-With': null,
+                                // 'Access-Control-Allow-Origin': '*',
+                                // 'Access-Control-Allow-Headers': 'Authorization',
                                 'Authorization': ctx.getters.authToken,
                             },
                         };
-
                         axios(config)
                             .then(function (response) {
                                 console.log(JSON.stringify(response.data));

@@ -48,13 +48,9 @@ export default {
   methods: {
     ...mapActions(['getAuthToken']),
     onSubmit() {
-      if (this.authToken === '') {    // если токена ещё нет в сторе
-        this.getAuthToken({'login': this.login, 'password': this.password});
-        if (this.authToken === '') {
-          this.isActive = true;
-        }
-      } else {
-        router.push({path: '/table'});  // в случае, если мы уже логинились, чтобы не создавать новый токен
+      this.getAuthToken({'login': this.login, 'password': this.password});
+      if (this.authToken === '') {
+        this.isActive = true;
       }
     }
   }
