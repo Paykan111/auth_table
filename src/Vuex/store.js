@@ -32,16 +32,18 @@ export default new Vuex.Store({
         },
 
         getDataTable(ctx) {
-            if (ctx.getters.authToken==='') {
-                router.push({path: '/auth/login'});
-            }
+            // if (ctx.getters.authToken === '') {
+            //     router.push({path: '/auth/login'});
+            // }
             console.log(ctx.getters.authToken)
-            let headers = {
-                'authorization': ctx.getters.authToken
+            let config = {
+                method: 'get',
+                url: 'http://localhost:8081/table',
+                headers: {
+                    'authorization': ctx.getters.authToken
+                }
             }
-            axios.get('http://localhost:8081/table',
-                {headers}
-            ).then((response) => {
+            axios(config).then((response) => {
                 console.log(response);
                 ctx.commit('addDataTable', response.data)
             }, (error) => {

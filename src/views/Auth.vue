@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Auth',
@@ -39,10 +39,18 @@ export default {
       msg: "Не верный логин или пароль!"
     }
   },
+
+  computed: {
+    ...mapGetters(['authToken'])
+  },
+
   methods: {
     ...mapActions(['getAuthToken']),
     onSubmit() {
       this.getAuthToken({'login': this.login,'password': this.password});
+      if (this.authToken === '') {
+        this.isActive = true;
+      }
     }
   }
 }

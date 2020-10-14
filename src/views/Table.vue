@@ -1,28 +1,18 @@
 <template>
   <div class="container">
 
-    <!--    <v-simple-table>-->
-    <!--      <tr v-for="(row, column) in this.dataJson" v-bind:key="row">-->
-    <!--        <th>{{ column }}</th>-->
-    <!--        <td v-for="item in row" v-bind:key="item">-->
-    <!--          {{ item }}-->
-    <!--        </td>-->
-    <!--      </tr>-->
-    <!--    </v-simple-table>-->
-
-    <!--    <v-data-table-->
-    <!--        :headers="headers"-->
-    <!--        :items="desserts"-->
-    <!--        :items-per-page="5"-->
-    <!--        class="elevation-1"-->
-    <!--    >-->
-    <!--    </v-data-table>-->
-
-    <h3>{{ dataTable }}</h3>
+    <div class="table" v-if="isActive">
+      <v-data-table
+          :headers="headers"
+          :items="itemsFromService"
+          :items-per-page="5"
+          class="elevation-1"
+      ></v-data-table>
+    </div>
 
     <div class="button">
-      <v-btn @click="getTokenB()" flat>
-        <span>get token</span>
+      <v-btn @click="getTable()" flat>
+        <span>Table</span>
       </v-btn>
     </div>
 
@@ -39,6 +29,18 @@ import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Table',
+  data() {
+    return {
+      isActive: false,
+
+      headers: [
+        {text: 'First name', value: ''},
+        {text: 'Last name', value: ''},
+        {text: 'Age', value: ''},],
+
+      itemsFromService: [],
+    }
+  },
 
   computed: {
     ...mapGetters(['dataTable'])
@@ -46,8 +48,10 @@ export default {
 
   methods: {
     ...mapActions(['getDataTable']),
-    getTokenB() {
+    getTable() {
       this.getDataTable()
+      // this.itemsFromService =
+      this.isActive = true
     }
   },
 
