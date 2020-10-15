@@ -2,7 +2,7 @@
 
   <div class="container">
 
-    <div class="table" v-if="isActive">
+    <div class="table" v-show="isActive">
       <v-data-table
           :headers="headers"
           :items="items"
@@ -60,7 +60,7 @@ export default {
   methods: {
     ...mapActions(['getDataTable']),
     getTable() {
-      // this.getDataTable()          //достаём данные с бэка
+       this.getDataTable()          //достаём данные с бэка
       // this.items = this.dataTable;
       this.isActive = true
     }
