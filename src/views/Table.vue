@@ -62,7 +62,7 @@ export default {
     getTable() {
       // this.getDataTable()          //достаём данные с бэка
       // this.items = this.dataTable;
-      // this.isActive = true
+      this.isActive = true
     }
   },
 
