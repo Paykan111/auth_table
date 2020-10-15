@@ -32,38 +32,18 @@ export default new Vuex.Store({
         },
 
         getDataTable: function (ctx) {
-            // if (ctx.getters.authToken === '') {              // это имеет смысл, если мы случайно зашли на вторую вкладку не залогинившись
+            // if (ctx.getters.authToken === '') {                     // если случайно зашли на вкладку c таблицей не залогинившись
             //     router.push({path: '/auth/login'});
             // }
             console.log(ctx.getters.authToken)
-
-            let headers = {'authorization': ctx.getters.authToken}
+            let headers = {'Authorization': ctx.getters.authToken}
             axios.get('http://localhost:8081/table',
                 {headers}
-                //{headers: {'Authorization': ctx.getters.authToken}}
             ).then(function (response) {
                 console.log(JSON.stringify(response.data));
             }).catch(function (error) {
                 console.log(error);
             });
-
-
-            /*            let config = {
-                            method: 'get',
-                            url: 'http://localhost:8081/table',
-                            headers: {
-                                // 'Access-Control-Allow-Origin': '*',
-                                // 'Access-Control-Allow-Headers': 'Authorization',
-                                'Authorization': ctx.getters.authToken,
-                            },
-                        };
-                        axios(config)
-                            .then(function (response) {
-                                console.log(JSON.stringify(response.data));
-                            })
-                            .catch(function (error) {
-                                console.log(error);
-                            });*/
 
         }
     },

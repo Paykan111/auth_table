@@ -48,9 +48,11 @@ export default {
   methods: {
     ...mapActions(['getAuthToken']),
     onSubmit() {
-      this.getAuthToken({'login': this.login, 'password': this.password});
       if (this.authToken === '') {
-        this.isActive = true;
+        this.getAuthToken({'login': this.login, 'password': this.password});
+        if (this.authToken === '') {
+          this.isActive = true;
+        }
       }
     }
   }

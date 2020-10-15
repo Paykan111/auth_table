@@ -1,12 +1,11 @@
 <template>
+
   <div class="container">
 
     <div class="table" v-if="isActive">
       <v-data-table
           :headers="headers"
-          :items="itemsFromService"
-          :items-per-page="5"
-          class="elevation-1"
+          :items="items"
       ></v-data-table>
     </div>
 
@@ -18,9 +17,10 @@
 
     <div class="linkToAuth">
       <v-btn href="/auth/login" flat>
-        <span>Log out</span>
+        <span>Back</span>
       </v-btn>
     </div>
+
   </div>
 </template>
 
@@ -29,16 +29,27 @@ import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Table',
-  data() {
-    return {
-      isActive: false,
+    data() {
+      return {
 
-      headers: [
-        {text: 'First name', value: ''},
-        {text: 'Last name', value: ''},
-        {text: 'Age', value: ''},],
+        isActive: false,
 
-      itemsFromService: [],
+       headers:
+            [
+          {text: 'Game #', value: 'name'},
+          {text: "Player 1", value: "PlayerOne"},
+          {text: "Player 2", value: "PlayerTwo"},
+        ],
+
+        items:
+       // [],
+
+        [
+          {name: 'name 1', PlayerOne: 'john', PlayerTwo: 'Mike'},
+          {name: 'name 2', PlayerOne: 'James', PlayerTwo: 'Bill'},
+          {name: 'name 3', PlayerOne: 'Jack', PlayerTwo: 'Ben'},
+         ],
+
     }
   },
 
@@ -49,9 +60,9 @@ export default {
   methods: {
     ...mapActions(['getDataTable']),
     getTable() {
-      this.getDataTable()
-      // this.itemsFromService =
-      this.isActive = true
+      // this.getDataTable()          //достаём данные с бэка
+      // this.items = this.dataTable;
+      // this.isActive = true
     }
   },
 
